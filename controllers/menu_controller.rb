@@ -9,43 +9,43 @@ class MenuController
 
   def main_menu
     puts "#{@address_book.name} Address Book Selected\n#{@address_book.entries.count} entries"
-    puts "0 - Switch AddressBook"
-    puts "1 - View all entries"
-    puts "2 - Create an entry"
-    puts "3 - Search for an entry"
-    puts "4 - Order by..."
-    puts "5 - Import entries from a CSV"
-    puts "6 - Exit"
+    puts "1 - Switch AddressBook"
+    puts "2 - View all entries"
+    puts "3 - Create an entry"
+    puts "4 - Search for an entry"
+    puts "5 - Order by..."
+    puts "6 - Import entries from a CSV"
+    puts "7 - Exit"
     print "Enter your selection: "
 
     selection = gets.to_i
 
     case selection
-      when 0
+      when 1
        system "clear"
        select_address_book_menu
        main_menu
-      when 1
+     when 2
         system "clear"
         view_all_entries
         main_menu
-      when 2
+      when 3
         system "clear"
         create_entry
         main_menu
-      when 3
+      when 4
         system "clear"
         search_entries
         main_menu
-      when 4
+      when 5
         system "clear"
         order_by
         main_menu
-      when 5
+      when 6
         system "clear"
         read_csv
         main_menu
-      when 6
+      when 7
         puts "Good-bye!"
         exit(0)
       else
@@ -132,6 +132,7 @@ class MenuController
       system "clear"
       main_menu
     end
+    entries = entries.where(address_book_id: @address_book.id)
     entries.each do |entry|
       system "clear"
       puts entry.to_s
@@ -204,7 +205,7 @@ class MenuController
     entry.update_attributes(updates)
     system "clear"
     puts "Updated entry:"
-    puts Entry.find(entry.id)
+    puts Entry.find(entry.id.to_i)
   end
 
   def search_submenu(entry)
